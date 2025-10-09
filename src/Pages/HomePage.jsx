@@ -14,7 +14,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const res = await api.get("/notes")
+        const res = await api.get("/")
         console.log(res.data);
         setNotes(res.data)
         setIsRateLimited(false)
@@ -45,7 +45,7 @@ const HomePage = () => {
         {notes.length > 0 && !isRateLimite && (
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
             {notes.map((note) => (
-              <NoteCard key={note.id} note={note} setNotes={setNotes} />
+              <NoteCard key={note._id} note={note} setNotes={setNotes} />
             ))}
           </div>
         )}
