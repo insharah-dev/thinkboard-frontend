@@ -16,7 +16,7 @@ import axios from "axios";
 //     : "https://thinkboard-backend-gold.vercel.app/";
 
 
-const BASE_URL = "http://localhost:3000/api/notes" || "https://thinkboard-backend-gold.vercel.app/";
+const BASE_URL = "http://localhost:3000/api/notes" || "https://thinkboard-backend-gold.vercel.app";
 
 
 const api = axios.create({
