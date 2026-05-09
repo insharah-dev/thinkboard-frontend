@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router'
 import api from '../lib/axios'
 import toast from 'react-hot-toast'
 import { ArrowLeftIcon, LoaderIcon, Trash2Icon } from 'lucide-react'
+import Swal from 'sweetalert2'
 
 const NoteDetailPage = () => {
   const [note, setNote] = useState(null)
@@ -29,7 +30,17 @@ const NoteDetailPage = () => {
     fetchNote()
   }, [id])
   const handleDelete = async () => {
-    if (!window.confirm("Are you sure You want to delete this note..?")) return;
+    const result = await Swal.fire({
+      icon: "warning",
+      title: "Deleted?",
+      text: "Are you sure You want to delete this note..?",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Deleted",
+      cancelButtonText: "No",
+    });
+
+    if (!result.isConfirmed) return;
+
     try {
       await api.delete(`/${id}`)
       toast.success("Note Deleted")

@@ -3,22 +3,39 @@ import { Link } from 'react-router-dom'
 import { formatDate } from '../lib/utils'
 import api from "../lib/axios"
 import toast from "react-hot-toast"
+import Swal from "sweetalert2";
 
 const NoteCard = ({ note, setNotes }) => {
+
     const handleDelete = async (e, id) => {
         e.preventDefault()
 
-        if (!window.confirm("Are you sure You want to delete this note..?")) return;
+        const result = await Swal.fire({
+            icon: "warning",
+            title: "Deleted?",
+            text: "Are you sure You want to delete this note..?",
+            showCancelButton: true,
+            confirmButtonText: "Yes, Deleted",
+            cancelButtonText: "No",
+        });
+
+        if (!result.isConfirmed) return;
 
         try {
             await api.delete(`/${id}`)
-            setNotes((prev) => prev.filter(note => note._id !== id))
+
+            setNotes((prev) =>
+                prev.filter(note => note._id !== id)
+            )
+
             toast.success("Note Deleted Successfully!")
+
         } catch (error) {
-            console.log("error in  handleDelete", error);
+            console.log("error in handleDelete", error);
             toast.error("Failed to delete note")
         }
     }
+
     return (
         <Link to={`/note/${note._id}`}
             className='card bg-base-100 hover:shadow-lg transition-all duration-200 border-t-4 border-solid border-[#00FF9D] '
