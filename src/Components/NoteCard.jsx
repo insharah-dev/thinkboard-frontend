@@ -20,16 +20,12 @@ const NoteCard = ({ note, setNotes }) => {
         });
 
         if (!result.isConfirmed) return;
-
         try {
-            await api.delete(`/${id}`)
-
+            await api.delete(`/delete/${id}`)
             setNotes((prev) =>
                 prev.filter(note => note._id !== id)
             )
-
             toast.success("Note Deleted Successfully!")
-
         } catch (error) {
             console.log("error in handleDelete", error);
             toast.error("Failed to delete note")
