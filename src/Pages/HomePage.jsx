@@ -14,7 +14,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const res = await api.get("/")
+        const res = await api.get("/getAll")
         console.log(res.data);
         setNotes(res.data)
         setIsRateLimited(false)

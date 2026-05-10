@@ -14,6 +14,8 @@ const NoteDetailPage = () => {
 
   const { id } = useParams()
 
+  console.log(id,"id check")
+
   useEffect(() => {
     const fetchNote = async () => {
       try {
