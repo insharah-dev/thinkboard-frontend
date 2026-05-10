@@ -19,7 +19,7 @@ const CreatePage = () => {
     }
     setLoading(true)
     try {
-      await api.post("/", {
+      await api.post("/create", {
         title, content
       })
       toast.success("Note Created Successfully!")
